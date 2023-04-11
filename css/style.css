@@ -1,0 +1,50 @@
+body {
+    margin-bottom: 40px;
+}
+
+
+.login-form {
+  width: 350px;
+}
+
+.login-img {
+  width: 350px;
+}
+
+.username {
+    text-transform: capitalize;
+}
+
+.welcome {
+    line-height: 200%;
+    font-size: 25px;
+}
+
+.img-dashboard {
+    max-height: 150px;
+}
+
+.boxes {
+    margin-bottom: 5px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: whitesmoke;
+    text-align: center;
+    width: 100%;
+    height: 25px;
+    border-top: 1px solid lightgray;
+}
+
+footer:hover {
+    background-color: lightgray;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+}
