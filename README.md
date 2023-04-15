@@ -14,9 +14,9 @@ Tema - Armazém Inteligente
 
  - Página de histórico para cada sensor e atuador;
 
- - Design apelativo e responsive utilizando Bootstrap (framework CSS);
+ - Design apelativo e responsive utilizando Bootstrap (framework CSS); --DONE--
 
- - Pelo menos 1 ficheiro CSS, com pelo menos 10 selectores CSS desenvolvido pelos estudantes com o seu design personalizado do website de acordo com o tema escolhido;
+ - Pelo menos 1 ficheiro CSS, com pelo menos 10 selectores CSS desenvolvido pelos estudantes com o seu design personalizado do website de acordo com o tema escolhido; --DONE--
 
  - Código desenvolvido deve estar devidamente comentado;
 
@@ -24,7 +24,7 @@ Tema - Armazém Inteligente
 
  - Comprovativo de validação (printsreen em PDF);
 
-  - 9x sensores/atuadores - (apenas layout) 
+  - 9x sensores/atuadores - (apenas layout) --DONE--
    - Sensores - Temperatura / Luminosidade / Fogo / Distancia / Humidade
    - Atuadores - AC / Iluminação / Buzzer / Portão
    

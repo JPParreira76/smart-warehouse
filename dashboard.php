@@ -5,6 +5,33 @@ if (!isset($_SESSION["username"])) {
     header("refresh:0; url=index.php");
     die("Acesso restrito.");
 }
+$valor_temperatura = file_get_contents("api/files/temperatura/valor.txt");
+$hora_temperatura = file_get_contents("api/files/temperatura/hora.txt");
+$nome_temperatura = file_get_contents("api/files/temperatura/nome.txt");
+$valor_luz = file_get_contents("api/files/luz/valor.txt");
+$hora_luz = file_get_contents("api/files/luz/hora.txt");
+$nome_luz = file_get_contents("api/files/luz/nome.txt");
+$valor_fogo = file_get_contents("api/files/fogo/valor.txt");
+$hora_fogo = file_get_contents("api/files/fogo/hora.txt");
+$nome_fogo = file_get_contents("api/files/fogo/nome.txt");
+$valor_ac = file_get_contents("api/files/ac/valor.txt");
+$hora_ac = file_get_contents("api/files/ac/hora.txt");
+$nome_ac = file_get_contents("api/files/ac/nome.txt");
+$valor_alarme = file_get_contents("api/files/alarme/valor.txt");
+$hora_alarme = file_get_contents("api/files/alarme/hora.txt");
+$nome_alarme = file_get_contents("api/files/alarme/nome.txt");
+$valor_iluminacao = file_get_contents("api/files/iluminacao/valor.txt");
+$hora_iluminacao = file_get_contents("api/files/iluminacao/hora.txt");
+$nome_iluminacao = file_get_contents("api/files/iluminacao/nome.txt");
+$valor_humidade = file_get_contents("api/files/humidade/valor.txt");
+$hora_humidade = file_get_contents("api/files/humidade/hora.txt");
+$nome_humidade = file_get_contents("api/files/humidade/nome.txt");
+$valor_distancia = file_get_contents("api/files/distancia/valor.txt");
+$hora_distancia = file_get_contents("api/files/distancia/hora.txt");
+$nome_distancia = file_get_contents("api/files/distancia/nome.txt");
+$valor_portao = file_get_contents("api/files/portao/valor.txt");
+$hora_portao = file_get_contents("api/files/portao/hora.txt");
+$nome_portao = file_get_contents("api/files/portao/nome.txt");
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +104,37 @@ if (!isset($_SESSION["username"])) {
             <div class="col-sm-4 boxes">
                 <div class="card">
                     <div class="card-header sensor text-center">
+                        <b>Humidade: <?php echo $valor_humidade; ?>%</b>
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="img-responsive" src="#" alt="humidade">
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b> <?php echo $hora_humidade; ?> - <a href="#">Histórico</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header sensor text-center">
+                        <b>Ar Condicionado: <?php echo $valor_ac; ?></b>
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="img-responsive" src="#" alt="ar-condicionado">
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b> <?php echo $hora_ac; ?> - <a href="#">Histórico</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header sensor text-center">
                         <b>Luz Natural: <?php echo $valor_luz; ?></b>
                     </div>
                     <div class="card-body text-center">
@@ -84,6 +142,19 @@ if (!isset($_SESSION["username"])) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b> <?php echo $hora_luz; ?> - <a href="#">Histórico</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header sensor text-center">
+                        <b>Distância ao Portão: <?php echo $valor_distancia; ?> metros</b>
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="img-responsive" src="#" alt="distancia">
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b> <?php echo $hora_distancia; ?> - <a href="#">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -107,32 +178,6 @@ if (!isset($_SESSION["username"])) {
         <div class="row">
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header sensor text-center">
-                        <b>Ar Condicionado: <?php echo $valor_ac; ?></b>
-                    </div>
-                    <div class="card-body text-center">
-                        <img class="img-responsive" src="#" alt="ar-condicionado">
-                    </div>
-                    <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_ac; ?> - <a href="#">Histórico</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 boxes">
-                <div class="card">
-                    <div class="card-header sensor text-center">
-                        <b>Alarme: <?php echo $valor_alarme; ?></b>
-                    </div>
-                    <div class="card-body text-center">
-                        <img class="img-responsive" src="#" alt="alarme">
-                    </div>
-                    <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_alarme; ?> - <a href="#">Histórico</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 boxes">
-                <div class="card">
                     <div class="card-header atuador text-center">
                         <b>Iluminação: <?php echo $valor_iluminacao; ?></b>
                     </div>
@@ -141,37 +186,6 @@ if (!isset($_SESSION["username"])) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b> <?php echo $hora_iluminacao; ?> - <a href="#">Histórico</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 boxes">
-                <div class="card">
-                    <div class="card-header sensor text-center">
-                        <b>Humidade: <?php echo $valor_humidade; ?>%</b>
-                    </div>
-                    <div class="card-body text-center">
-                        <img class="img-responsive" src="#" alt="humidade">
-                    </div>
-                    <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_humidade; ?> - <a href="#">Histórico</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 boxes">
-                <div class="card">
-                    <div class="card-header sensor text-center">
-                        <b>Distância ao Portão: <?php echo $valor_distancia; ?> metros</b>
-                    </div>
-                    <div class="card-body text-center">
-                        <img class="img-responsive" src="#" alt="distancia">
-                    </div>
-                    <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_distancia; ?> - <a href="#">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -188,13 +202,26 @@ if (!isset($_SESSION["username"])) {
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header sensor text-center">
+                        <b>Alarme: <?php echo $valor_alarme; ?></b>
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="img-responsive" src="#" alt="alarme">
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b> <?php echo $hora_alarme; ?> - <a href="#">Histórico</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <div class="card boxes">
             <div class="card-header">
-                <b>Tabela de Sensores</b>
+                <b>Tabela de Sensores e Estado de Atuadores</b>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -208,58 +235,58 @@ if (!isset($_SESSION["username"])) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo $nome_temperatura; ?></td>
+                            <td>Temperatura</td>
                             <td><?php echo $valor_temperatura; ?>°</td>
                             <td><?php echo $hora_temperatura; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
+                            <td><span class="badge rounded-pill text-bg-success">Normal</span></td>
                         </tr>
                         <tr>
-                            <td><?php echo $nome_luz; ?></td>
-                            <td><?php echo $valor_luz; ?></td>
-                            <td><?php echo $hora_luz; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $nome_fogo; ?></td>
-                            <td><?php echo $valor_fogo; ?></td>
-                            <td><?php echo $hora_fogo; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $nome_ac; ?></td>
-                            <td><?php echo $valor_ac; ?></td>
-                            <td><?php echo $hora_ac; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $nome_iluminacao; ?></td>
-                            <td><?php echo $valor_iluminacao; ?></td>
-                            <td><?php echo $hora_iluminacao; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $nome_alarme; ?></td>
-                            <td><?php echo $valor_alarme; ?></td>
-                            <td><?php echo $hora_alarme; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $nome_humidade; ?></td>
+                            <td>Humidade</td>
                             <td><?php echo $valor_humidade; ?>%</td>
                             <td><?php echo $hora_humidade; ?></td>
                             <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
                         </tr>
                         <tr>
-                            <td><?php echo $nome_distancia; ?></td>
-                            <td><?php echo $valor_distancia; ?> metros</td>
-                            <td><?php echo $hora_temperatura; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
+                            <td>Ar Condicionado</td>
+                            <td><?php echo $valor_ac; ?></td>
+                            <td><?php echo $hora_ac; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Desligado</span></td>
                         </tr>
                         <tr>
-                            <td><?php echo $nome_portao; ?></td>
+                            <td>Luz Natural</td>
+                            <td><?php echo $valor_luz; ?></td>
+                            <td><?php echo $hora_luz; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Boa</span></td>
+                        </tr>
+                        <tr>
+                            <td>Iluminação</td>
+                            <td><?php echo $valor_iluminacao; ?></td>
+                            <td><?php echo $hora_iluminacao; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Desligada</span></td>
+                        </tr>
+                        <tr>
+                            <td>Incêndio</td>
+                            <td><?php echo $valor_fogo; ?></td>
+                            <td><?php echo $hora_fogo; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Normal</span></td>
+                        </tr>
+                        <tr>
+                            <td>Alarme Incêndio</td>
+                            <td><?php echo $valor_alarme; ?></td>
+                            <td><?php echo $hora_alarme; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Desligado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Distância ao Portão</td>
+                            <td><?php echo $valor_distancia; ?> metros</td>
+                            <td><?php echo $hora_temperatura; ?></td>
+                            <td><span class="badge rounded-pill text-bg-success">Longe</span></td>
+                        </tr>
+                        <tr>
+                            <td>Estado do Portão</td>
                             <td><?php echo $valor_portao; ?></td>
                             <td><?php echo $hora_portao; ?></td>
-                            <td><span class="badge rounded-pill text-bg-danger">Elevada</span></td>
+                            <td><span class="badge rounded-pill text-bg-success">Fechado</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -268,7 +295,9 @@ if (!isset($_SESSION["username"])) {
     </div>
 
     <footer>
-        <a class="link" href="#Top"><p>To the Top</p></a>
+        <a class="link" href="#Top">
+            <p>To the Top</p>
+        </a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
