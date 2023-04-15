@@ -2,7 +2,6 @@ body {
     margin-bottom: 40px;
 }
 
-
 .login-form {
   width: 350px;
 }
@@ -37,14 +36,20 @@ footer {
     width: 100%;
     height: 25px;
     border-top: 1px solid lightgray;
+    text-decoration: none;
 }
 
 footer:hover {
-    background-color: lightgray;
+    background-color: black;
+    border-top: none;
 }
 
 .link {
+    font-size: 14px;
     text-decoration: none;
     color: black;
-    font-size: 14px;
+}
+
+.link:hover {
+    color: white;
 }

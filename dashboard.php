@@ -45,7 +45,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Warehouse - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -56,10 +56,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
             <div class="container">
                 <ul class="navbar-nav">
                     <li class="navbar-brand">
-                        <p class="nav-item active">Smart Warehouse</p>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">Home</a>
+                        <a href="dashboard.php"><p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button">Smart Warehouse</button></p></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Webcam</a>
@@ -69,7 +66,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                     </li>
                 </ul>
                 <form class="d-flex" role="logout">
-                    <a href="logout.php"><button class="btn btn-dark" type="button">Logout</button></a>
+                    <a href="logout.php"><button class="btn btn-outline-dark" type="button">Logout</button></a>
                 </form>
             </div>
         </nav>
@@ -79,7 +76,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
         <div class="card boxes">
             <div class="card-body">
                 <img class="float-end img-dashboard" src="./img/warehouse.png" alt="estg logo">
-                <h1>Dashboard Smart Warehouse</h1>
+                <h1>Dashboard</h1>
                 <p class="welcome">Bem vindo <span class="username"><?php echo $_SESSION["username"] ?></span></p>
                 <p>Tecnologias de Internet - Engenharia Informática</p>
             </div>
@@ -97,7 +94,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="temperatura">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_temperatura; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -110,7 +107,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="humidade">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_humidade; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_humidade; ?> - <a href="history_humidade.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -123,7 +120,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="ar-condicionado">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_ac; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_ac; ?> - <a href="history_ac.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -141,7 +138,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="luz-natural">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_luz; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_luz; ?> - <a href="history_luz.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -154,7 +151,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="distancia">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_distancia; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_distancia; ?> - <a href="history_distancia.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -167,7 +164,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="incendio">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_fogo; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_fogo; ?> - <a href="history_fogo.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -185,7 +182,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="iluminacao">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_iluminacao; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_iluminacao; ?> - <a href="history_iluminacao.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -198,7 +195,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="portao">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_portao; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_portao; ?> - <a href="history_portao.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -211,7 +208,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
                         <img class="img-responsive" src="#" alt="alarme">
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b> <?php echo $hora_alarme; ?> - <a href="#">Histórico</a>
+                        <b>Atualização:</b> <?php echo $hora_alarme; ?> - <a href="history_alarme.php"><button type="button" class="btn btn-outline-dark btn-sm">Histórico</button></a>
                     </div>
                 </div>
             </div>
@@ -296,7 +293,7 @@ $nome_portao = file_get_contents("api/files/portao/nome.txt");
 
     <footer>
         <a class="link" href="#Top">
-            <p>To the Top</p>
+            <p>Top</p>
         </a>
     </footer>
 
