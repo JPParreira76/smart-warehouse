@@ -12,7 +12,7 @@ Tema - Armazém Inteligente
 
  - Página de dashboard personalizada de acordo com o tema;
 
- - Página de histórico para cada sensor e atuador;
+ - Página de histórico para cada sensor e atuador; --DONE--
 
  - Design apelativo e responsive utilizando Bootstrap (framework CSS); --DONE--
 
@@ -32,7 +32,7 @@ Tema - Armazém Inteligente
 
   - Video do projeto - (apenas layout)
 
-  - Botões de eventos no dashboard - (apenas layout)
+  - Botões de eventos no dashboard - (apenas layout) --DONE--
 
 Resumo
 
