@@ -1,6 +1,9 @@
 <?php
 session_start();
-$_SESSION["username"] = $_POST["username"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {// atribui username e password as devidas variaveis em caso de POST
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +33,17 @@ $_SESSION["username"] = $_POST["username"];
                 </div>
                 <div>
                     <?php
-                    // validação do login
-                    if ($_POST["username"] == $_SESSION["username_1"] && password_verify($_POST["password"], $_SESSION["hash_1"]) || $_POST["username"] == $_SESSION["username_2"] && password_verify($_POST["password"], $_SESSION["hash_2"]) || $_POST["username"] == $_SESSION["username_3"] && password_verify($_POST["password"], $_SESSION["hash_3"])) {
-                        // login validado
-                        header("refresh:1; url=dashboard.php");
-                        echo "<p>Password correta!</p>";
-                    } elseif(isset($_POST["username"])) {
-                        echo "<p>Credenciais inválidas!</p>";
+                    //verifica se existem parametros de login
+                    if(isset($_POST['password']) && isset($_POST['username'])){
+                        // validação do login
+                        if ($_POST["username"] == $_SESSION["username_1"] && password_verify($_POST["password"], $_SESSION["hash_1"]) || $_POST["username"] == $_SESSION["username_2"] && password_verify($_POST["password"], $_SESSION["hash_2"]) || $_POST["username"] == $_SESSION["username_3"] && password_verify($_POST["password"], $_SESSION["hash_3"])) {
+                            // login validado
+                            $_SESSION["username"] = $_POST["username"];
+                            header("refresh:1; url=dashboard.php");
+                            echo "<p>Password correta!</p>";
+                        } elseif(isset($_POST["username"])) {
+                         echo "<p>Credenciais inválidas!</p>";
+                        }
                     }
                     ?>
                 </div>
