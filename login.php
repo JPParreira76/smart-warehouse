@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // atribui username e password as devidas variaveis em caso de POST
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -45,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // atribui username e password as de
                             header("refresh:1; url=dashboard.php");
                             echo "<p>Password correta!</p>";
                         } elseif (isset($_POST["username"])) {
+                            // login não validado
                             echo "<p>Credenciais inválidas!</p>";
                         }
                     }
