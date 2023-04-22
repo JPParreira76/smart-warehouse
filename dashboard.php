@@ -96,7 +96,7 @@ if ($valor_portao == 0) {
                 <div class="container">
                     <ul class="navbar-nav">
                         <li class="navbar-brand">
-                            <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button"><a class="linkbig" href="dashboard.php">Smart Warehouse</a></button></p>
+                            <p class="nav-item active"><a href="dashboard.php" class="btn btn-outline-dark btn-lg" role="button">Smart Warehouse</a></p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="webcam.php">Webcam</a>
@@ -106,7 +106,7 @@ if ($valor_portao == 0) {
                         </li>
                     </ul>
                     <form class="d-flex" role="button">
-                        <button class="btn btn-outline-dark" type="button"><a class="link" href="logout.php">Logout</a></button>
+                        <a href="logout.php" class="btn btn-outline-dark" role="button">Logout</a>
                     </form>
                 </div>
             </nav>
@@ -158,7 +158,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_temperatura; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_temperatura.php">Histórico</a></button>
+                        <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -194,7 +194,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_humidade; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_humidade.php">Histórico</a></button>
+                        <?php echo $hora_humidade; ?> - <a href="history_humidade.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_ac; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_ac.php">Histórico</a></button>
+                        <?php echo $hora_ac; ?> - <a href="history_ac.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_luz; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_luz.php">Histórico</a></button>
+                        <?php echo $hora_luz; ?> - <a href="history_luz.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -288,7 +288,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_distancia; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_distancia.php">Histórico</a></button>
+                        <?php echo $hora_distancia; ?> - <a href="history_distancia.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -318,7 +318,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_fogo; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_fogo.php">Histórico</a></button>
+                        <?php echo $hora_fogo; ?> - <a href="history_fogo.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -352,7 +352,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_iluminacao; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_iluminacao.php">Histórico</a></button>
+                        <?php echo $hora_iluminacao; ?> - <a href="history_iluminacao.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -383,7 +383,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_portao; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_portao.php">Histórico</a></button>
+                        <?php echo $hora_portao; ?> - <a href="history_portao.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
@@ -412,7 +412,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_alarme; ?> - <button type="button" class="btn btn-outline-dark btn-sm"><a class="link" href="history_alarme.php">Histórico</a></button>
+                        <?php echo $hora_alarme; ?> - <a href="history_alarme.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>

@@ -53,13 +53,3 @@ footer:hover {
 .link:hover {
     color: white;
 }
-
-.linkbig {
-    font-size: 20px;
-    text-decoration: none;
-    color: black;
-}
-
-.linkbig:hover {
-    color: white;
-}
