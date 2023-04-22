@@ -47,10 +47,7 @@ fclose($file);
                 <div class="container">
                     <ul class="navbar-nav">
                         <li class="navbar-brand">
-                            <a href="dashboard.php">
-                                <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button">Smart
-                                        Warehouse</button></p>
-                            </a>
+                            <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button"><a class="linkbig" href="dashboard.php">Smart Warehouse</a></button></p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="webcam.php">Webcam</a>
@@ -59,8 +56,8 @@ fclose($file);
                             <a class="nav-link" href="video.php">Video do Projeto</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="logout">
-                        <a href="logout.php"><button class="btn btn-outline-dark" type="button">Logout</button></a>
+                    <form class="d-flex" role="button">
+                        <button class="btn btn-outline-dark" type="button"><a class="link" href="logout.php">Logout</a></button>
                     </form>
                 </div>
             </nav>
