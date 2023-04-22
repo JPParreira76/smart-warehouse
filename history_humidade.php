@@ -42,27 +42,29 @@ fclose($file);
 <body>
 
     <div class="container">
-        <nav class="navbar navbar-expand-sm navegador">
-            <div class="container">
-                <ul class="navbar-nav">
-                    <li class="navbar-brand">
-                        <a href="dashboard.php">
-                            <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button">Smart
-                                    Warehouse</button></p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="webcam.php">Webcam</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="video.php">Video do Projeto</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="logout">
-                    <a href="logout.php"><button class="btn btn-outline-dark" type="button">Logout</button></a>
-                </form>
-            </div>
-        </nav>
+        <div class="card boxes">
+            <nav class="navbar navbar-expand-sm navegador">
+                <div class="container">
+                    <ul class="navbar-nav">
+                        <li class="navbar-brand">
+                            <a href="dashboard.php">
+                                <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button">Smart
+                                        Warehouse</button></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="webcam.php">Webcam</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="video.php">Video do Projeto</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="logout">
+                        <a href="logout.php"><button class="btn btn-outline-dark" type="button">Logout</button></a>
+                    </form>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class="container">

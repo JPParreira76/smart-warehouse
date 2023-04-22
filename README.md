@@ -6,7 +6,7 @@ Tema - Armazém Inteligente
 
 1º Fase
 
- - API para recolha e envio de informações, com as respetivas validações, seguindo as boas práticas de desenvolvimento web;
+ - API para recolha e envio de informações, com as respetivas validações, seguindo as boas práticas de desenvolvimento web; --DONE--
  
  - Comprovativo de validação (printsreen em PDF);
 
