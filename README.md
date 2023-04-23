@@ -8,7 +8,7 @@ Tema - Armazém Inteligente
 
  - API para recolha e envio de informações, com as respetivas validações, seguindo as boas práticas de desenvolvimento web; --DONE--
  
- - Comprovativo de validação (printsreen em PDF);
+ - Comprovativo de validação (printsreen em PDF); --DONE--
 
  - Página de autenticação, com pelo menos 2 utilizadores, estando as credenciais num ficheiro PHP à parte do restante código; --DONE--
 
