@@ -65,7 +65,7 @@ fclose($file);
     <div class="container">
         <div class="card boxes">
             <div class="card-body">
-                <img class="float-end img-dashboard" src="./img/warehouse.png" alt="estg logo">
+                <img class="float-end img-dashboard" src="./img/warehouse2.png" alt="estg logo">
                 <h1>Histórico de Temperatura</h1>
                 <p class="welcome">Bem vindo <span class="username">
                         <?php echo $_SESSION["username"] ?>
@@ -77,7 +77,7 @@ fclose($file);
 
     <div class="container">
         <div class="card boxes">
-            <div class="card-header">
+            <div class="card-header headers">
                 <b>Tabela de Histórico de Temperatura</b>
             </div>
             <div class="card-body">

@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // atribui username e password as de
     <div class="container">
         <div class="row justify-content-center">
             <form class="login-form" method="post">
-                <a href="index.php"><img class="login-img" src="./img/login_logo.png" alt="estg logo"></a>
+                <a href="index.php"><img class="login-img" src="./img/login_logo2.png" alt="estg logo"></a>
                 <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input name="username" placeholder="Insira aqui o seu username" type="text" class="form-control"

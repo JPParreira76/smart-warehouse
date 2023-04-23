@@ -50,7 +50,7 @@ if (!isset($_SESSION["username"])) {
     <div class="container">
         <div class="card boxes">
             <div class="card-body">
-                <img class="float-end img-dashboard" src="./img/warehouse.png" alt="estg logo">
+                <img class="float-end img-dashboard" src="./img/warehouse2.png" alt="estg logo">
                 <h1>Webcam</h1>
                 <p class="welcome">Bem vindo <span class="username">
                         <?php echo $_SESSION["username"] ?>

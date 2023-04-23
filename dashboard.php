@@ -114,7 +114,7 @@ if ($valor_portao == 0) {
     <div class="container">
         <div class="card boxes">
             <div class="card-body">
-                <img class="float-end img-dashboard" src="./img/warehouse.png" alt="estg logo">
+                <img class="float-end img-dashboard" src="./img/warehouse2.png" alt="estg logo">
                 <h1>Dashboard</h1>
                 <p class="welcome">Bem vindo <span class="username">
                         <?php echo $_SESSION["username"] ?>
@@ -128,7 +128,7 @@ if ($valor_portao == 0) {
         <div class="row">
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Temperatura:
                             <?php echo $valor_temperatura; ?>°
                         </b>
@@ -162,7 +162,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Humidade:
                             <?php echo $valor_humidade; ?>%
                         </b>
@@ -198,7 +198,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Ar Condicionado:
                             <?php echo $string_ac; ?>
                         </b>
@@ -233,7 +233,7 @@ if ($valor_portao == 0) {
         <div class="row">
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Luz Natural:
                             <?php echo $string_luz; ?>
                         </b>
@@ -263,7 +263,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Distância ao Portão:
                             <?php echo $valor_distancia; ?> metros
                         </b>
@@ -292,7 +292,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Incêndio:
                             <?php echo $string_fogo; ?>
                         </b>
@@ -327,7 +327,7 @@ if ($valor_portao == 0) {
         <div class="row">
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Iluminação:
                             <?php echo $string_iluminacao; ?>
                         </b>
@@ -356,7 +356,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Portão:
                             <?php echo $string_portao; ?>
                         </b>
@@ -387,7 +387,7 @@ if ($valor_portao == 0) {
             </div>
             <div class="col-sm-4 boxes">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center headers">
                         <b>Alarme:
                             <?php echo $string_alarme; ?>
                         </b>
@@ -420,7 +420,7 @@ if ($valor_portao == 0) {
     <!-- force start button to be implemented -->
     <div class="container">
         <div class="card boxes">
-            <div class="card-header">
+            <div class="card-header headers">
                 <b>Tabela de Sensores e Estado de Atuadores</b>
             </div>
             <div class="card-body">
