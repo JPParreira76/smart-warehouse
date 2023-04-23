@@ -32,10 +32,7 @@ if (!isset($_SESSION["username"])) {
                 <div class="container">
                     <ul class="navbar-nav">
                         <li class="navbar-brand">
-                            <a href="dashboard.php">
-                                <p class="nav-item active"><button class="btn btn-outline-dark btn-lg" type="button">Smart
-                                        Warehouse</button></p>
-                            </a>
+                            <p class="nav-item active"><a href="dashboard.php" class="btn btn-outline-dark btn-lg" role="button">Smart Warehouse</a></p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="webcam.php">Webcam</a>
@@ -44,9 +41,7 @@ if (!isset($_SESSION["username"])) {
                             <a class="nav-link" href="video.php">Video do Projeto</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="logout">
-                        <a href="logout.php"><button class="btn btn-outline-dark" type="button">Logout</button></a>
-                    </form>
+                    <button onclick="window.location.href='logout.php'" class="btn btn-outline-dark" type="button">Logout</button>
                 </div>
             </nav>
         </div>

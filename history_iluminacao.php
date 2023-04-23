@@ -56,9 +56,7 @@ fclose($file);
                             <a class="nav-link" href="video.php">Video do Projeto</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="button">
-                        <a href="logout.php" class="btn btn-outline-dark" role="button">Logout</a>
-                    </form>
+                    <button onclick="window.location.href='logout.php'" class="btn btn-outline-dark" type="button">Logout</button>
                 </div>
             </nav>
         </div>
