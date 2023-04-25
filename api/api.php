@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Parametros incorretos no POST";
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    echo "Recebi um GET" . PHP_EOL;
     if (isset($_GET['nome'])) {
         $fileName = "files/" . $_GET['nome'] . "/valor.txt";
         if (!is_readable($fileName)) {
