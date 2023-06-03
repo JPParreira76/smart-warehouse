@@ -1,0 +1,65 @@
+body {
+    margin-bottom: 40px;
+    background-color: whitesmoke;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+.login-form {
+    width: 350px;
+}
+
+.login-img {
+    width: 350px;
+}
+
+.username {
+    text-transform: capitalize;
+}
+
+.welcome {
+    line-height: 200%;
+    font-size: 25px;
+}
+
+.img-dashboard {
+    max-height: 150px;
+}
+
+.boxes {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: lightgray;
+    text-align: center;
+    width: 100%;
+    height: 25px;
+    border-top: 1px solid gray;
+    text-decoration: none;
+}
+
+footer:hover {
+    background-color: black;
+    border-top: none;
+}
+
+.link {
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    color: white;
+}
+
+.headers {
+    background-color: lightgray;
+}
