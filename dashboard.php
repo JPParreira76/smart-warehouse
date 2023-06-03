@@ -96,16 +96,16 @@ if ($valor_portao == 0) {
                 <div class="container">
                     <ul class="navbar-nav">
                         <li class="navbar-brand">
-                            <p class="nav-item active"><a href="dashboard.php" class="btn btn-outline-dark btn-lg" role="button">Smart Warehouse</a></p>
+                            <p class="nav-item active"><a href="dashboard.php" class="btn btn-dark btn-lg" role="button">Smart Warehouse</a></p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="webcam.php">Webcam</a>
+                            <a class="nav-link align-middle" href="webcam.php">Webcam</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="video.php">Video do Projeto</a>
+                            <a class="nav-link align-middle" href="video.php">Video do Projeto</a>
                         </li>
                     </ul>
-                    <button onclick="window.location.href='logout.php'" class="btn btn-outline-dark" type="button">Logout</button>
+                    <button onclick="window.location.href='logout.php'" class="btn btn-dark" type="button">Logout</button>
                 </div>
             </nav>
         </div>
