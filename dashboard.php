@@ -417,6 +417,26 @@ if ($valor_portao == 0) {
         </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header text-center headers">
+                        <b>Imagem
+                        </b>
+                    </div>
+                    <div class="card-body text-center">
+                        <?php echo "<img src='api/images/webcam.jpg?id=".time()."' style='width:100%'>"; ?>
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b>
+                        <?php echo $hora_iluminacao; ?> - <a href="history_iluminacao.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+
     <!-- force start button to be implemented -->
     <div class="container">
         <div class="card boxes">
