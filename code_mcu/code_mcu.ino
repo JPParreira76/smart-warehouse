@@ -6,18 +6,17 @@
 #include <TimeLib.h>
 
 #define DHTPIN 0       // Pin Digital onde está ligado o sensor
-#define DHTTYPE DHT11  // Tipo de sensor DHT
+#define DHTTYPE DHT11  // Tipo de sensor DHT 
 
 DHT dht(DHTPIN, DHTTYPE);  // Instanciar e declarar a class DHT
 
-WiFiUDP clienteUDP; //Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
-
+WiFiUDP clienteUDP; 
+//Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
 char NTP_SERVER[] = "0.pool.ntp.org";
 NTPClient timeClient(clienteUDP, NTP_SERVER, 3600);
 
 char SSID[] = "labs";
 char PASS_WIFI[] = "robot1cA!ESTG";
-
 char URL[] = "192.168.88.244";
 int PORTO = 80;
 
@@ -25,28 +24,23 @@ WiFiClient clienteWifi;
 HttpClient clienteHTTP = HttpClient(clienteWifi, URL, PORTO);
 
 void post2API(String nome, float valor, String hora) {
-  
+
   String URLPath = "/smart-warehouse/api/api.php";
   String contentType = "application/x-www-form-urlencoded";
-
   String enviaNome = nome;
   String enviaValor = String(valor);
   String enviaHora = hora;
-
   String body = "nome=" + enviaNome + "&valor=" + enviaValor + "&hora=" + enviaHora;
 
   clienteHTTP.post(URLPath, contentType, body);
 
   while (clienteHTTP.connected()) {
-
     if (clienteHTTP.available()) {
       int responseStatusCode = clienteHTTP.responseStatusCode();
       String responseBody = clienteHTTP.responseBody();
       Serial.println("Status Code: " + String(responseStatusCode) + " Resposta: " + responseBody);
     }
-
   }
-
 }
 
 void update_time(char *datahora) {
@@ -82,28 +76,88 @@ void setup() {
 }
 
 void loop() {
+  //GETS
+  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?temperatura=valor");
+  float valor_temperatura;
 
-  float temperatura = dht.readTemperature();
-  float humidade = dht.readHumidity();
+  if (clienteHTTP.responseStatusCode() == 200) {
+    valor_temperatura = clienteHTTP.responseBody().toFloat();
+    Serial.print("Recebido valor da temperatura");
+    Serial.println(valor_temperatura);
+  } else {
+    Serial.println("Erro na leitura da temperatura.");
+  }
 
-  Serial.print("Temperatura: ");
-  Serial.println(temperatura);
+  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?ac=valor");
+  int valor_ac;
 
-  Serial.print("Humidade: ");
-  Serial.println(humidade);
+  if (clienteHTTP.responseStatusCode() == 200) {
+    valor_ac = clienteHTTP.responseBody().toInt();
+    Serial.print("Recebido valor do ar condicionado");
+  } else {
+    Serial.println("Erro na leitura do ar condicionado.");
+  }
+
+  if (valor_ac == 2) {
+    // Desliga LED AC
+  }
+
+  if (valor_ac == 3) {
+    // Liga LED AC
+  }
+
+  if ((valor_temperatura > 20 || valor_temperatura < 10) && valor_ac != 2 && valor_ac != 3) {
+    // liga LED AC
+    valor_ac = 1;
+    // valor_ac = valor_ac.toFloat();
+    post2API("ac", valor_ac, datahora); // Resolver int -> float
+  }
+
+  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?portao=valor");
+  int valor_portao;
+
+  if (clienteHTTP.responseStatusCode() == 200) {
+    valor_portao = clienteHTTP.responseBody().toInt();
+    Serial.print("Recebido valor do portao");
+  } else {
+    Serial.println("Erro na leitura do portao.");
+  }
+
+  if (valor_portao == 0) {
+    // Desliga LED portao
+  }
+
+  if (valor_portao == 1) {
+    // Liga LED portao
+  }
+
+  //POSTS
+  float luminosidade = dht.readLuminosidade(); // Ler sensor de Luminosidade
+  int luz = 0;
+  char luzNatural[20];
+
+  if (luminosidade <= 50) {
+    luz = 0;
+    strcpy(luzNatural, "Fraca");
+  }
+
+  if (luminosidade > 50) {
+    luz = 1;
+    strcpy(luzNatural, "Boa");
+  }
+
+  Serial.print("Luminosidade: ");
+  Serial.println(luminosidade);
+
+  Serial.print("Luz: ");
+  Serial.println(luzNatural);
 
   char datahora[20];
   update_time(datahora);
   Serial.print("Data Atual: ");
   Serial.println(datahora);
 
-  post2API("temperatura", temperatura, datahora);
-  post2API("humidade", humidade, datahora);
+  post2API("luz", luz, datahora);
 
   delay(5000);
-
-  //@ return 0 if successful,else error
-  //int post(const char* aURLPath, const char* aContentType, const char* aBody);
-  //int post(const String& aURLPath, const String& aContentType, const String& aBody);
-  //int post(const char* aURLPath, const char* aContentType, int aContentLength, const byte aBody[]);
 }
