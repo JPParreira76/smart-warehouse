@@ -346,7 +346,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Enviar nova captura</b>
-                        <a href="webcam.php" target="_blank" role="button" class="btn btn-outline-dark btn-sm">Upload</a>
+                        <a href="webcam.php" role="button" class="btn btn-outline-dark btn-sm">Upload</a>
                     </div>
                 </div>
             </div>
