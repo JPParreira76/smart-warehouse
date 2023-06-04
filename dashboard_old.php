@@ -14,15 +14,24 @@ $nome_temperatura = file_get_contents("api/files/temperatura/nome.txt");
 $valor_luz = file_get_contents("api/files/luz/valor.txt");
 $hora_luz = file_get_contents("api/files/luz/hora.txt");
 $nome_luz = file_get_contents("api/files/luz/nome.txt");
+$valor_fogo = file_get_contents("api/files/fogo/valor.txt");
+$hora_fogo = file_get_contents("api/files/fogo/hora.txt");
+$nome_fogo = file_get_contents("api/files/fogo/nome.txt");
 $valor_ac = file_get_contents("api/files/ac/valor.txt");
 $hora_ac = file_get_contents("api/files/ac/hora.txt");
 $nome_ac = file_get_contents("api/files/ac/nome.txt");
+$valor_alarme = file_get_contents("api/files/alarme/valor.txt");
+$hora_alarme = file_get_contents("api/files/alarme/hora.txt");
+$nome_alarme = file_get_contents("api/files/alarme/nome.txt");
 $valor_iluminacao = file_get_contents("api/files/iluminacao/valor.txt");
 $hora_iluminacao = file_get_contents("api/files/iluminacao/hora.txt");
 $nome_iluminacao = file_get_contents("api/files/iluminacao/nome.txt");
 $valor_humidade = file_get_contents("api/files/humidade/valor.txt");
 $hora_humidade = file_get_contents("api/files/humidade/hora.txt");
 $nome_humidade = file_get_contents("api/files/humidade/nome.txt");
+$valor_distancia = file_get_contents("api/files/distancia/valor.txt");
+$hora_distancia = file_get_contents("api/files/distancia/hora.txt");
+$nome_distancia = file_get_contents("api/files/distancia/nome.txt");
 $valor_portao = file_get_contents("api/files/portao/valor.txt");
 $hora_portao = file_get_contents("api/files/portao/hora.txt");
 $nome_portao = file_get_contents("api/files/portao/nome.txt");
@@ -33,13 +42,25 @@ if ($valor_luz == 0) {
     $string_luz = "Boa";
 }
 
-if ($valor_ac == 0 || $valor_ac == 2) {
+if ($valor_fogo == 0) {
+    $string_fogo = "Sem Incêndio";
+} else {
+    $string_fogo = "Incêndio";
+}
+
+if ($valor_ac == 0) {
     $string_ac = "Desligado";
 } else {
     $string_ac = "Ligado";
 }
 
-if ($valor_iluminacao == 0 || $valor_iluminacao == 2) {
+if ($valor_alarme == 0) {
+    $string_alarme = "Desligado";
+} else {
+    $string_alarme = "Ligado";
+}
+
+if ($valor_iluminacao == 0) {
     $string_iluminacao = "Desligada";
 } else {
     $string_iluminacao = "Ligada";
@@ -64,36 +85,6 @@ if ($valor_portao == 0) {
     <title>Smart Warehouse - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
-
-    <script>
-        function writeToFile(nome, value) {
-            // Send an AJAX request to the server-side script
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/smart-warehouse/api/write_file.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            // Define the data to be sent
-            var data = "nome=" + encodeURIComponent(nome) + "&value=" + encodeURIComponent(value);
-
-            // Handle the response from the server
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // File successfully written
-                        console.log("File written successfully.");
-                    } else {
-                        // Error occurred
-                        console.log("Error writing file.");
-                    }
-                }
-            };
-
-            // Send the request
-            xhr.send(data);
-        }
-    </script>
-
-
 
 </head>
 
@@ -215,13 +206,13 @@ if ($valor_portao == 0) {
                     <div class="card-body text-center">
                         <?php
                         // Dynamic SVG
-                        if ($valor_ac == 0 || $valor_ac == 2) {
+                        if ($valor_ac == 0) {
                             echo
                             '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-slash-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                             <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
                         </svg>';
-                        } elseif ($valor_ac == 1 || $valor_ac == 3) {
+                        } elseif ($valor_ac == 1) {
                             echo
                             '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-wind" viewBox="0 0 16 16">
                             <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z" />
@@ -273,6 +264,70 @@ if ($valor_portao == 0) {
             <div class="col-sm-4 boxes">
                 <div class="card">
                     <div class="card-header text-center headers">
+                        <b>Distância ao Portão:
+                            <?php echo $valor_distancia; ?> metros
+                        </b>
+                    </div>
+                    <div class="card-body text-center">
+                        <?php
+                        // Dynamic SVG
+                        if ($valor_distancia > 5) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-sign-no-parking" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm5.29-3.416L9.63 8.923C10.5 8.523 11 7.66 11 6.586c0-1.482-.955-2.584-2.538-2.584H5.5v.79L3.416 2.71a7 7 0 0 1 9.874 9.874Zm-.706.707A7 7 0 0 1 2.71 3.417l2.79 2.79V12h1.283V9.164h1.674l4.127 4.127ZM8.726 8.019 6.777 6.07v-.966H8.27c.893 0 1.419.539 1.419 1.482 0 .769-.35 1.273-.963 1.433Zm-1.949-.534.59.59h-.59v-.59Z" />
+                        </svg>';
+                        } elseif ($valor_distancia <= 5) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                            <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                        </svg>';
+                        }
+                        ?>
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b>
+                        <?php echo $hora_distancia; ?> - <a href="history_distancia.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header text-center headers">
+                        <b>Incêndio:
+                            <?php echo $string_fogo; ?>
+                        </b>
+                    </div>
+                    <div class="card-body text-center">
+                        <?php
+                        // Dynamic SVG
+                        if ($valor_fogo == 0) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-slash-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
+                        </svg>';
+                        } elseif ($valor_fogo == 1) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                            <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z" />
+                        </svg>';
+                        }
+                        ?>
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b>
+                        <?php echo $hora_fogo; ?> - <a href="history_fogo.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header text-center headers">
                         <b>Iluminação:
                             <?php echo $string_iluminacao; ?>
                         </b>
@@ -280,12 +335,12 @@ if ($valor_portao == 0) {
                     <div class="card-body text-center">
                         <?php
                         // Dynamic SVG
-                        if ($valor_iluminacao == 0 || $valor_iluminacao == 2) {
+                        if ($valor_iluminacao == 0) {
                             echo
                             '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-lightbulb-off" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M2.23 4.35A6.004 6.004 0 0 0 2 6c0 1.691.7 3.22 1.826 4.31.203.196.359.4.453.619l.762 1.769A.5.5 0 0 0 5.5 13a.5.5 0 0 0 0 1 .5.5 0 0 0 0 1l.224.447a1 1 0 0 0 .894.553h2.764a1 1 0 0 0 .894-.553L10.5 15a.5.5 0 0 0 0-1 .5.5 0 0 0 0-1 .5.5 0 0 0 .288-.091L9.878 12H5.83l-.632-1.467a2.954 2.954 0 0 0-.676-.941 4.984 4.984 0 0 1-1.455-4.405l-.837-.836zm1.588-2.653.708.707a5 5 0 0 1 7.07 7.07l.707.707a6 6 0 0 0-8.484-8.484zm-2.172-.051a.5.5 0 0 1 .708 0l12 12a.5.5 0 0 1-.708.708l-12-12a.5.5 0 0 1 0-.708z" />
                         </svg>';
-                        } elseif ($valor_iluminacao == 1 || $valor_iluminacao == 3) {
+                        } elseif ($valor_iluminacao == 1) {
                             echo
                             '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
                             <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z" />
@@ -330,70 +385,55 @@ if ($valor_portao == 0) {
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4 boxes">
+                <div class="card">
+                    <div class="card-header text-center headers">
+                        <b>Alarme:
+                            <?php echo $string_alarme; ?>
+                        </b>
+                    </div>
+                    <div class="card-body text-center">
+                        <?php
+                        // Dynamic SVG
+                        if ($valor_alarme == 0) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-bell-slash" viewBox="0 0 16 16">
+                            <path d="M5.164 14H15c-.299-.199-.557-.553-.78-1-.9-1.8-1.22-5.12-1.22-6 0-.264-.02-.523-.06-.776l-.938.938c.02.708.157 2.154.457 3.58.161.767.377 1.566.663 2.258H6.164l-1 1zm5.581-9.91a3.986 3.986 0 0 0-1.948-1.01L8 2.917l-.797.161A4.002 4.002 0 0 0 4 7c0 .628-.134 2.197-.459 3.742-.05.238-.105.479-.166.718l-1.653 1.653c.02-.037.04-.074.059-.113C2.679 11.2 3 7.88 3 7c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0c.942.19 1.788.645 2.457 1.284l-.707.707zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z" />
+                        </svg>';
+                        } elseif ($valor_alarme == 1) {
+                            echo
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="25%" height="auto" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                        </svg>';
+                        }
+                        ?>
+                    </div>
+                    <div class="card-footer text-center">
+                        <b>Atualização:</b>
+                        <?php echo $hora_alarme; ?> - <a href="history_alarme.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 boxes">
+            <div class="col-sm-4 boxes">
                 <div class="card">
                     <div class="card-header text-center headers">
-                        <b>Webcam
+                        <b>Imagem
                         </b>
                     </div>
                     <div class="card-body text-center">
-                        <?php echo "<img src='api/images/webcam.jpg?id=" . time() . "' style='width:100%'>"; ?>
+                        <?php echo "<img src='api/images/webcam.jpg?id=".time()."' style='width:100%'>"; ?>
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
                         <?php echo $hora_iluminacao; ?> - <a href="history_iluminacao.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3 boxes">
-                <div class="card">
-                    <div class="card-header text-center headers">
-                        <b>Controlo Ar Condicionado
-                        </b>
-                    </div>
-                    <div class="card-body text-center">
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('ac', 3)">Ligar</button>
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('ac', 2)">Desligar</button>
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('ac', 0)">Automático</button>
-                    </div>
-                    <div class="card-footer text-center">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 boxes">
-                <div class="card">
-                    <div class="card-header text-center headers">
-                        <b>Controlo Iluminação
-                        </b>
-                    </div>
-                    <div class="card-body text-center">
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('iluminacao', 3)">Ligar</button>
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('iluminacao', 2)">Desligar</button>
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('iluminacao', 0)">Automático</button>
-                    </div>
-                    <div class="card-footer text-center">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 boxes">
-                <div class="card">
-                    <div class="card-header text-center headers">
-                        <b>Controlo Portão
-                        </b>
-                    </div>
-                    <div class="card-body text-center">
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('portao', 1)">Abrir</button>
-                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="writeToFile('portao', 0)">Fechar</button>
-                    </div>
-                    <div class="card-footer text-center">
-                    </div>
-                </div>
-            </div>
+            </div>         
         </div>
     </div>
 
@@ -504,6 +544,60 @@ if ($valor_portao == 0) {
                                     echo '<span class="badge rounded-pill text-bg-success">Desligada</span>';
                                 } elseif ($valor_iluminacao == 1) {
                                     echo '<span class="badge rounded-pill text-bg-danger">Ligada</span>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Incêndio</td>
+                            <td>
+                                <?php echo $string_fogo; ?>
+                            </td>
+                            <td>
+                                <?php echo $hora_fogo; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($valor_fogo == 0) {
+                                    echo '<span class="badge rounded-pill text-bg-success">Sem Incêndio</span>';
+                                } elseif ($valor_fogo == 1) {
+                                    echo '<span class="badge rounded-pill text-bg-danger">Incêndio</span>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alarme Incêndio</td>
+                            <td>
+                                <?php echo $string_alarme; ?>
+                            </td>
+                            <td>
+                                <?php echo $hora_alarme; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($valor_alarme == 0) {
+                                    echo '<span class="badge rounded-pill text-bg-success">Desligado</span>';
+                                } elseif ($valor_alarme == 1) {
+                                    echo '<span class="badge rounded-pill text-bg-danger">Ligado</span>';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Distância ao Portão</td>
+                            <td>
+                                <?php echo $valor_distancia; ?> metros
+                            </td>
+                            <td>
+                                <?php echo $hora_temperatura; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($valor_distancia > 5) {
+                                    echo '<span class="badge rounded-pill text-bg-success">Longe</span>';
+                                } elseif ($valor_distancia <= 5) {
+                                    echo '<span class="badge rounded-pill text-bg-success">Perto</span>';
                                 }
                                 ?>
                             </td>

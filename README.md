@@ -46,3 +46,9 @@ Resumo
 2ª Fase
 
 TBD
+
+Dados
+
+ - SBC user:pi; password:password
+ - Rede labs: robot1cA!ESTG
+ - URL: IP: config
