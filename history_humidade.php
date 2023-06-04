@@ -36,7 +36,7 @@ fclose($file);
     <title>Histórico de Humidade</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -71,6 +71,14 @@ fclose($file);
                         <?php echo $_SESSION["username"] ?>
                     </span></p>
                 <p>Tecnologias de Internet - Engenharia Informática</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card boxes">
+            <div class="card-body">
+                <canvas id="chart"></canvas>
             </div>
         </div>
     </div>
@@ -112,6 +120,56 @@ fclose($file);
             <p>Top</p>
         </a>
     </footer>
+
+    <script>
+        // Extrair datas e valores do histórico
+        var dates = [];
+        var values = [];
+        <?php
+        foreach ($log_humidade as $row) {
+            echo "dates.push('" . $row[0] . "');";
+            echo "values.push(" . $row[1] . ");";
+        }
+        ?>
+
+        // Configuração do gráfico
+        var chartConfig = {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Humidade',
+                    data: values,
+                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Data'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Humidade'
+                        }
+                    }
+                }
+            }
+        };
+
+        // Renderizar o gráfico
+        var ctx = document.getElementById('chart').getContext('2d');
+        new Chart(ctx, chartConfig);
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 

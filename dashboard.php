@@ -165,7 +165,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                        <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php" role="button" class="btn btn-outline-dark btn-sm">Histórico / Gráfico</a>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_humidade; ?> - <a href="history_humidade.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                        <?php echo $hora_humidade; ?> - <a href="history_humidade.php" role="button" class="btn btn-outline-dark btn-sm">Histórico / Gráfico</a>
                     </div>
                 </div>
             </div>
