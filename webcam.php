@@ -63,7 +63,7 @@ if (!isset($_SESSION["username"])) {
         <div class="card boxes">
             <div class="card-body text-center">
                 <form action="api/upload.php" method="post" enctype="multipart/form-data">
-                    <label>Seleccione um ficheiro de imagem para fazer upload:</label><br>
+                    <label>Seleccione um ficheiro de imagem para fazer upload:<br>Apenas jpg e png com um máximo de 1000kB:</label><br>
                     <input type="file" name="imagem" id="fileToUpload"><br>
                     <input type="submit" value="Submeter ficheiro" name="submit">
                 </form>
