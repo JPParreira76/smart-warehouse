@@ -345,8 +345,8 @@ if ($valor_portao == 0) {
                         <?php echo "<img src='api/images/webcam.jpg?id=" . time() . "' style='width:100%'>"; ?>
                     </div>
                     <div class="card-footer text-center">
-                        <b>Atualização:</b>
-                        <?php echo $hora_iluminacao; ?> - <a href="history_iluminacao.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                        <b>Enviar nova captura</b>
+                        <a href="webcam.php" target="_blank" role="button" class="btn btn-outline-dark btn-sm">Upload</a>
                     </div>
                 </div>
             </div>

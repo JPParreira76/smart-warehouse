@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tempFile = $_FILES['imagem']['tmp_name'];
         $dest = 'images/webcam.jpg';
         move_uploaded_file($tempFile, $dest);
+        header('Location: /smart-warehouse/dashboard.php'); // Redirect to dashboard.php
     } else {
         echo "Erro";
     }
