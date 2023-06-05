@@ -23,6 +23,17 @@ int PORTO = 80;
 WiFiClient clienteWifi;
 HttpClient clienteHTTP = HttpClient(clienteWifi, URL, PORTO);
 
+/** Connect to the server and send a POST request with body and content type
+@param aURLPath Url to request
+@param aContentType Content type of request body
+@param aBody Body of the request
+@return 0 if successful, else error
+
+int post(const char* aURLPath, const char* aContentType, const char* aBody);
+int post(const String& aURLPath, const String& aContentType, const String& aBody);
+int post(const char* aURLPath, const char* aContentType, int aContentLength, const byte aBody[]);
+*/
+
 void post2API(String nome, float valor, String hora) {
 
   String URLPath = "/smart-warehouse/api/api.php";
@@ -162,3 +173,4 @@ void loop() {
 
   delay(5000);
 }
+
