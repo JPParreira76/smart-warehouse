@@ -5,19 +5,20 @@
 #include <WiFiUdp.h>  //Pré-instalada com o Arduino IDE
 #include <TimeLib.h>
 
-#define DHTPIN 0       // Pin Digital onde está ligado o sensor
-#define DHTTYPE DHT11  // Tipo de sensor DHT 
+//#define DHTPIN A1       // Pin Digital onde está ligado o sensor
+//#define DHTTYPE DHT11  // Tipo de sensor DHT 
+//DHT dht(DHTPIN, DHTTYPE);  // Instanciar e declarar a class DHT
 
-DHT dht(DHTPIN, DHTTYPE);  // Instanciar e declarar a class DHT
+const int ldrPin = A1;  // S=A1 Middle=VCC -=GND 
 
 WiFiUDP clienteUDP; 
 //Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
 char NTP_SERVER[] = "0.pool.ntp.org";
 NTPClient timeClient(clienteUDP, NTP_SERVER, 3600);
 
-char SSID[] = "labs";
+char SSID[] = "labs_02";
 char PASS_WIFI[] = "robot1cA!ESTG";
-char URL[] = "192.168.88.244";
+char URL[] = "10.79.12.30";
 int PORTO = 80;
 
 WiFiClient clienteWifi;
@@ -34,7 +35,7 @@ int post(const String& aURLPath, const String& aContentType, const String& aBody
 int post(const char* aURLPath, const char* aContentType, int aContentLength, const byte aBody[]);
 */
 
-void post2API(String nome, float valor, String hora) {
+void post2API(String nome, int valor, String hora) {
 
   String URLPath = "/smart-warehouse/api/api.php";
   String contentType = "application/x-www-form-urlencoded";
@@ -82,32 +83,47 @@ void setup() {
   Serial.print("Received Signal Strength Indicator: ");
   Serial.println(WiFi.RSSI());
 
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT); // LED Ar Condicionado Builtin
 
-  dht.begin();
+  pinMode(0, OUTPUT); // LED Portao GND PIN 0
+
+  //dht.begin();
 }
 
 void loop() {
+
+  char datahora[20];
+  update_time(datahora);
+  Serial.print("Data Atual: ");
+  Serial.println(datahora);
+
   //GETS
-  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?temperatura=valor");
-  float valor_temperatura;
+  clienteHTTP.get("/smart-warehouse/api/api.php?nome=temperatura");
+  int valor_temperatura;
 
   if (clienteHTTP.responseStatusCode() == 200) {
-    valor_temperatura = clienteHTTP.responseBody().toFloat();
-    Serial.print("Recebido valor da temperatura");
+    valor_temperatura = clienteHTTP.responseBody().toInt();
+    Serial.print("Recebido valor da temperatura: ");
     Serial.println(valor_temperatura);
   } else {
     Serial.println("Erro na leitura da temperatura.");
   }
 
-  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?ac=valor");
+  clienteHTTP.get("/smart-warehouse/api/api.php?nome=ac");
   int valor_ac;
 
   if (clienteHTTP.responseStatusCode() == 200) {
     valor_ac = clienteHTTP.responseBody().toInt();
-    Serial.print("Recebido valor do ar condicionado");
+    Serial.print("Recebido valor do ar condicionado: ");
+    Serial.println(valor_ac);
   } else {
     Serial.println("Erro na leitura do ar condicionado.");
+  }
+
+  if ((valor_temperatura > 20 || valor_temperatura < 10) && valor_ac != 2 && valor_ac != 3) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    valor_ac = 1;
+    post2API("ac", valor_ac, datahora);
   }
 
   if (valor_ac == 2) {
@@ -118,42 +134,37 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH);
   }
 
-  if ((valor_temperatura > 20 || valor_temperatura < 10) && valor_ac != 2 && valor_ac != 3) {
-    digitalWrite(LED_BUILTIN, HIGH);
-    valor_ac = 1;
-    valor_ac = valor_ac.toFloat();
-    post2API("ac", valor_ac, datahora); // Resolver int -> float
-  }
-
-  clienteHTTP.get("192.168.88.244/smart-warehouse/api/api.php?portao=valor");
+  clienteHTTP.get("/smart-warehouse/api/api.php?nome=portao");
   int valor_portao;
 
   if (clienteHTTP.responseStatusCode() == 200) {
     valor_portao = clienteHTTP.responseBody().toInt();
-    Serial.print("Recebido valor do portao");
+    Serial.print("Recebido valor do portao: ");
+    Serial.println(valor_portao);
   } else {
     Serial.println("Erro na leitura do portao.");
   }
 
   if (valor_portao == 0) {
-    // Desliga LED portao
+    digitalWrite(0, LOW);
   }
 
   if (valor_portao == 1) {
-    // Liga LED portao
+    digitalWrite(0, HIGH);
   }
 
   //POSTS
-  float luminosidade = dht.readLuminosidade(); // Ler sensor de Luminosidade
+  //float luminosidade = dht.readLuminosidade(); // Ler sensor de Luminosidade
+  int luminosidade = analogRead(ldrPin);
   int luz = 0;
   char luzNatural[20];
 
-  if (luminosidade <= 50) {
+  if (luminosidade >= 512) {
     luz = 0;
     strcpy(luzNatural, "Fraca");
   }
 
-  if (luminosidade > 50) {
+  if (luminosidade < 512) {
     luz = 1;
     strcpy(luzNatural, "Boa");
   }
@@ -163,11 +174,6 @@ void loop() {
 
   Serial.print("Luz: ");
   Serial.println(luzNatural);
-
-  char datahora[20];
-  update_time(datahora);
-  Serial.print("Data Atual: ");
-  Serial.println(datahora);
 
   post2API("luz", luz, datahora);
 
