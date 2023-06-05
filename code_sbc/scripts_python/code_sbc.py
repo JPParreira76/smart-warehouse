@@ -11,7 +11,6 @@ pin = 4  # GPIO pin number connected to the sensor
 led_pin = 3  # Pino GPIO conectado ao LED
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)
-threshold = 50  # Valor limite para acender o LED
 url_luz = "192.168.88.244/smart-warehouse/api/api.php?luz=valor"
 url_iluminacao = "192.168.88.244/smart-warehouse/api/api.php?iluminacao=valor"
 
