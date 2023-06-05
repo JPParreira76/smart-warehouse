@@ -165,7 +165,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                        <?php echo $hora_temperatura; ?> - <a href="history_temperatura.php" role="button" class="btn btn-outline-dark btn-sm">Histórico / Gráfico</a>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@ if ($valor_portao == 0) {
                     </div>
                     <div class="card-footer text-center">
                         <b>Atualização:</b>
-                        <?php echo $hora_humidade; ?> - <a href="history_humidade.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
+                        <?php echo $hora_humidade; ?> - <a href="history_humidade.php" role="button" class="btn btn-outline-dark btn-sm">Histórico / Gráfico</a>
                     </div>
                 </div>
             </div>
@@ -342,11 +342,32 @@ if ($valor_portao == 0) {
                         </b>
                     </div>
                     <div class="card-body text-center">
-                        <?php echo "<img src='api/images/webcam.jpg?id=" . time() . "' style='width:100%'>"; ?>
+
+                        <?php
+                        $imageDirectory = 'api/images/';
+                        $latestImage = '';
+
+                        // Obtém o nome do arquivo da última imagem no diretório
+                        $files = scandir($imageDirectory);
+                        $imageFiles = array_filter($files, function ($file) {
+                            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                            return in_array($extension, array('jpg', 'jpeg', 'png'));
+                        });
+                        $latestImage = end($imageFiles);
+
+                        if (!empty($latestImage)) {
+                            echo "<img src='api/images/" . $latestImage . "?id=" . time() . "' style='width:100%'>";
+                        } else {
+                            echo "Nenhuma imagem recebida.";
+                        }
+                        ?>
                     </div>
+
+
                     <div class="card-footer text-center">
                         <b>Enviar nova captura</b>
                         <a href="webcam.php" role="button" class="btn btn-outline-dark btn-sm">Upload</a>
+                        <a href="history_images.php" role="button" class="btn btn-outline-dark btn-sm">Histórico</a>
                     </div>
                 </div>
             </div>
