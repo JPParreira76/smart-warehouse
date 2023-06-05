@@ -1,24 +1,49 @@
 import requests
 import time
 import RPi.GPIO as GPIO
-import requests
 import datetime
 import Adafruit_DHT
+import cv2
+import math
 from urllib.parse import urlencode
 
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
-pin = 4  # GPIO pin number connected to the sensor
-led_pin = 3  # Pino GPIO conectado ao LED
+pin = 3  # GPIO pin number connected to the sensor
+led_pin = 11  # Pino GPIO conectado ao LED
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)
-url_luz = "192.168.88.244/smart-warehouse/api/api.php?luz=valor"
-url_iluminacao = "192.168.88.244/smart-warehouse/api/api.php?iluminacao=valor"
+url_luz = "10.79.12.30/smart-warehouse/api/api.php?luz=valor"
+url_iluminacao = "10.79.12.30/smart-warehouse/api/api.php?iluminacao=valor"
+webcam_url = "https://rooftop.tryfail.net:50000/image.jpeg"
+upload_url = "10.79.12.30/smart-warehouse/api/upload.php?"
+
+
+def capture_and_upload_image(url_webcam, url_upload):
+    try:
+        cap = cv2.VideoCapture(url_webcam)
+        ret, frame = cap.read()
+        cap.release()
+
+        if ret:
+            cv2.imwrite('captura.jpg', frame)
+            files = {'imagem': open('captura.jpg', 'rb')}
+            response = requests.post(url_upload, files=files)
+
+            if response.status_code == 200:
+                print("Image uploaded successfully")
+            else:
+                raise RuntimeError("Failed to upload image: " + response.text)
+        else:
+            raise ValueError("Failed to capture image from webcam")
+    except Exception as e:
+        raise RuntimeError("Error capturing and uploading image: " + str(e))
+
 
 def read_temperature(sensor, pin):
 
     _, temperature = Adafruit_DHT.read_retry(sensor, pin)
     
-    if temperature is not None:
+    if temperature is not None and not math.isnan(temperature):
         return temperature
     else:
         print('Failed to read temperature from the sensor!')
@@ -29,7 +54,7 @@ def read_humidity(sensor, pin):
 
     humidity,_ = Adafruit_DHT.read_retry(sensor, pin)
     
-    if humidity is not None:
+    if humidity is not None and not math.isnan(humidity):
         return humidity
     else:
         print('Failed to read humidity from the sensor!')
@@ -37,7 +62,7 @@ def read_humidity(sensor, pin):
 
 
 def post2API(nome, valor):   
-    url = "/smart-warehouse/api/api.php"
+    url = "10.79.12.30/smart-warehouse/api/api.php?"
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     #payload = {"nome": nome, "valor": str(valor), "hora": agora}
@@ -96,8 +121,11 @@ def get_iluminacao(url):
         print("Valor invalido recebido.")
         return None
 
+
+#loop que vai estar a correr
 try:
     while True:
+        #Sensores Posts, Gets e logica
         temperature = read_temperature(sensor, pin)
         if temperature is not None:
             post2API("temperatura", temperature)
@@ -117,6 +145,8 @@ try:
                     GPIO.output(led_pin, GPIO.HIGH)
                     print("LED aceso!")
                     post2API("iluminacao", valor_iluminacao)
+                    #Webcam - liga camara
+                    capture_and_upload_image(webcam_url, upload_url)
 
                 if valor_luz == 1:# ha luz
                     #desliga led
@@ -136,17 +166,24 @@ try:
                     #liga led
                     GPIO.output(led_pin, GPIO.HIGH)
                     print("LED aceso!")
-            
-        time.sleep(5)  
+                    #Webcam - liga camara
+                    capture_and_upload_image(webcam_url, upload_url)
+
+        time.sleep(10) 
+
+except requests.exceptions.RequestException as req_ex:
+    print("Request error:", req_ex)
+
+except ValueError as value_ex:
+    print("Value error:", value_ex)
+
+except Exception as ex:
+    print("Unexpected error:", ex)
+    print("Please try again.") 
 
 except KeyboardInterrupt:
     # Handle keyboard interrupt (Ctrl+C)
     print("\nProgram interrupted by user.")
-
-except Exception as e:
-    # Handle other exceptions
-    print("Unexpected error:", e)
-    print("Please try again.")
 
 finally:
     # Cleanup GPIO pins
