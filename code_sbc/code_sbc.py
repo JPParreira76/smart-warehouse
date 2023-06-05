@@ -125,9 +125,6 @@ def get_iluminacao(url):
 #loop que vai estar a correr
 try:
     while True:
-        #Webcam
-        capture_and_upload_image(webcam_url, upload_url)
-
         #Sensores Posts, Gets e logica
         temperature = read_temperature(sensor, pin)
         if temperature is not None:
@@ -148,6 +145,8 @@ try:
                     GPIO.output(led_pin, GPIO.HIGH)
                     print("LED aceso!")
                     post2API("iluminacao", valor_iluminacao)
+                    #Webcam - liga camara
+                    capture_and_upload_image(webcam_url, upload_url)
 
                 if valor_luz == 1:# ha luz
                     #desliga led
@@ -167,6 +166,8 @@ try:
                     #liga led
                     GPIO.output(led_pin, GPIO.HIGH)
                     print("LED aceso!")
+                    #Webcam - liga camara
+                    capture_and_upload_image(webcam_url, upload_url)
 
         time.sleep(10) 
 
