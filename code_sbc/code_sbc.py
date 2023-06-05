@@ -5,6 +5,7 @@ import requests
 import datetime
 import Adafruit_DHT
 import cv2
+import math
 from urllib.parse import urlencode
 
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
@@ -19,28 +20,31 @@ upload_url = "192.168.88.244/smart-warehouse/api/upload.php?"
 
 
 def capture_and_upload_image(url_webcam, url_upload):
-    cap = cv2.VideoCapture(url_webcam)
-    ret, frame = cap.read()
-    cap.release()
+    try:
+        cap = cv2.VideoCapture(url_webcam)
+        ret, frame = cap.read()
+        cap.release()
 
-    if ret:
-        cv2.imwrite('captura.jpg', frame)
-        files = {'imagem': open('captura.jpg', 'rb')}
-        response = requests.post(url_upload, files=files)
+        if ret:
+            cv2.imwrite('captura.jpg', frame)
+            files = {'imagem': open('captura.jpg', 'rb')}
+            response = requests.post(url_upload, files=files)
 
-        if response.status_code == 200:
-            print("Image uploaded successfully")
+            if response.status_code == 200:
+                print("Image uploaded successfully")
+            else:
+                raise RuntimeError("Failed to upload image: " + response.text)
         else:
-            print("Failed to upload image:", response.text)
-    else:
-        print("Failed to capture image from webcam")
+            raise ValueError("Failed to capture image from webcam")
+    except Exception as e:
+        raise RuntimeError("Error capturing and uploading image: " + str(e))
 
 
 def read_temperature(sensor, pin):
 
     _, temperature = Adafruit_DHT.read_retry(sensor, pin)
     
-    if temperature is not None:
+    if temperature is not None and not math.isnan(temperature):
         return temperature
     else:
         print('Failed to read temperature from the sensor!')
@@ -51,7 +55,7 @@ def read_humidity(sensor, pin):
 
     humidity,_ = Adafruit_DHT.read_retry(sensor, pin)
     
-    if humidity is not None:
+    if humidity is not None and not math.isnan(humidity):
         return humidity
     else:
         print('Failed to read humidity from the sensor!')
