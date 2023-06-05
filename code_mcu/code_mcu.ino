@@ -50,7 +50,7 @@ void update_time(char *datahora) {
 }
 
 void setup() {
-  // put your setup code here, to run once:
+
   Serial.begin(115200);
   while (!Serial)
     ;
@@ -61,6 +61,7 @@ void setup() {
     Serial.println(".");
     delay(500);
   }
+
   Serial.print("IP Adress: ");
   Serial.println((IPAddress)WiFi.localIP());
   Serial.print("Subnet Mask: ");
@@ -99,17 +100,17 @@ void loop() {
   }
 
   if (valor_ac == 2) {
-    // Desliga LED AC
+    digitalWrite(LED_BUILTIN, LOW);
   }
 
   if (valor_ac == 3) {
-    // Liga LED AC
+    digitalWrite(LED_BUILTIN, HIGH);
   }
 
   if ((valor_temperatura > 20 || valor_temperatura < 10) && valor_ac != 2 && valor_ac != 3) {
-    // liga LED AC
+    digitalWrite(LED_BUILTIN, HIGH);
     valor_ac = 1;
-    // valor_ac = valor_ac.toFloat();
+    valor_ac = valor_ac.toFloat();
     post2API("ac", valor_ac, datahora); // Resolver int -> float
   }
 
