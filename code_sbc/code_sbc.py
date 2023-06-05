@@ -1,7 +1,6 @@
 import requests
 import time
 import RPi.GPIO as GPIO
-import requests
 import datetime
 import Adafruit_DHT
 import cv2
@@ -168,17 +167,22 @@ try:
                     #liga led
                     GPIO.output(led_pin, GPIO.HIGH)
                     print("LED aceso!")
-            
-        time.sleep(5)  
+
+        time.sleep(5) 
+
+except requests.exceptions.RequestException as req_ex:
+    print("Request error:", req_ex)
+
+except ValueError as value_ex:
+    print("Value error:", value_ex)
+
+except Exception as ex:
+    print("Unexpected error:", ex)
+    print("Please try again.") 
 
 except KeyboardInterrupt:
     # Handle keyboard interrupt (Ctrl+C)
     print("\nProgram interrupted by user.")
-
-except Exception as e:
-    # Handle other exceptions
-    print("Unexpected error:", e)
-    print("Please try again.")
 
 finally:
     # Cleanup GPIO pins
