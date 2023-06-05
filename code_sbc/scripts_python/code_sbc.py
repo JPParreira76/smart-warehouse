@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import requests
 import datetime
 import Adafruit_DHT
+import cv2
 from urllib.parse import urlencode
 
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
@@ -13,6 +14,27 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)
 url_luz = "192.168.88.244/smart-warehouse/api/api.php?luz=valor"
 url_iluminacao = "192.168.88.244/smart-warehouse/api/api.php?iluminacao=valor"
+webcam_url = "https://rooftop.tryfail.net:50000/image.jpeg"
+upload_url = "192.168.88.244/smart-warehouse/api/upload.php?"
+
+
+def capture_and_upload_image(url_webcam, url_upload):
+    cap = cv2.VideoCapture(url_webcam)
+    ret, frame = cap.read()
+    cap.release()
+
+    if ret:
+        cv2.imwrite('captura.jpg', frame)
+        files = {'imagem': open('captura.jpg', 'rb')}
+        response = requests.post(url_upload, files=files)
+
+        if response.status_code == 200:
+            print("Image uploaded successfully")
+        else:
+            print("Failed to upload image:", response.text)
+    else:
+        print("Failed to capture image from webcam")
+
 
 def read_temperature(sensor, pin):
 
@@ -96,8 +118,14 @@ def get_iluminacao(url):
         print("Valor invalido recebido.")
         return None
 
+
+#loop que vai estar a correr
 try:
     while True:
+        #Webcam
+        capture_and_upload_image(webcam_url, upload_url)
+
+        #Sensores Posts, Gets e logica
         temperature = read_temperature(sensor, pin)
         if temperature is not None:
             post2API("temperatura", temperature)
