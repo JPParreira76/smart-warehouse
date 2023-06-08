@@ -120,7 +120,7 @@ void loop() {
     Serial.println("Erro na leitura do ar condicionado.");
   }
 
-  if ((valor_temperatura > 20 || valor_temperatura < 10) && valor_ac != 2 && valor_ac != 3) {
+  if ((valor_temperatura > 15 || valor_temperatura < 5) && valor_ac != 2 && valor_ac != 3) {
     digitalWrite(LED_BUILTIN, HIGH);
     valor_ac = 1;
     post2API("ac", valor_ac, datahora);

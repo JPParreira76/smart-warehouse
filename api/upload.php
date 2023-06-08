@@ -9,6 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Diretório onde as imagens são armazenadas
         $directory = 'images/';
 
+        // Obter a lista de arquivos no diretório
+        $files = scandir($directory);
+        $existingImages = count($files) - 2; // Exclui as entradas "." e ".."
+
+        // Verifica se já existem 10 imagens no diretório
+        if ($existingImages >= 10) {
+            // Exclui a imagem mais antiga
+            $oldestImage = $files[2]; // O primeiro arquivo é a entrada "."
+            $oldestImagePath = $directory . $oldestImage;
+            unlink($oldestImagePath);
+        }
+
         // Gera um nome de arquivo único com base na data e hora atual
         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $fileName = 'image_' . date('YmdHis') . '.' . $extension;
