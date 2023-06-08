@@ -7,8 +7,8 @@ import cv2
 import math
 from urllib.parse import urlencode
 
-sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
-pin = 7  # GPIO pin number connected to the sensor
+sensor = Adafruit_DHT.DHT11
+pin = 4  # GPIO pin number connected to the sensor
 led_pin = 11  # Pino GPIO conectado ao LED
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)
@@ -26,7 +26,7 @@ def capture_and_upload_image(url_webcam, url_upload):
 
         if ret:
             cv2.imwrite('captura.jpg', frame)
-            files = {'images': open('captura.jpg', 'rb')}
+            files = {'imagem': open('captura.jpg', 'rb')}
             response = requests.post(url_upload, files=files)
 
             if response.status_code == 200:
@@ -41,25 +41,14 @@ def capture_and_upload_image(url_webcam, url_upload):
         print("Error capturing and uploading image:", str(e))
 
 
-def read_temperature(sensor, pin):
+def read_dht11(sensor,pin):
 
-    _, temperature = Adafruit_DHT.read_retry(sensor, pin)
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     
-    if temperature is not None and not math.isnan(temperature):
-        return temperature
+    if temperature is not None and humidity is not None and not math.isnan(temperature):
+        return temperature, humidity
     else:
         print('Failed to read temperature from the sensor!')
-        return None
-
-
-def read_humidity(sensor, pin):
-
-    humidity,_ = Adafruit_DHT.read_retry(sensor, pin)
-    
-    if humidity is not None and not math.isnan(humidity):
-        return humidity
-    else:
-        print('Failed to read humidity from the sensor!')
         return None
 
 
@@ -128,13 +117,12 @@ def get_iluminacao(url):
 try:
     while True:
         #Sensores Posts, Gets e logica
-        temperature = read_temperature(sensor, pin)
-        if temperature is not None:
-            post2API("temperatura", temperature)
+        temperatura, humidade = read_dht11(sensor,pin)
+        if temperatura is not None:
+            post2API("temperatura", temperatura)
         
-        #humidity = read_humidity(sensor, pin)
-        if humidity is not None:
-            post2API("humidade", humidity)
+        if humidade is not None:
+            post2API("humidade", humidade)
         
         valor_luz = get_valor_luz(url_luz)
         valor_iluminacao = get_iluminacao(url_iluminacao)
