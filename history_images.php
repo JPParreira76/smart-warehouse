@@ -69,7 +69,7 @@ $imageFiles = array_slice($imageFiles, 0, $maxImages);
                 <img class="float-end img-dashboard" src="./img/warehouse2.png" alt="estg logo">
                 <h1>Histórico de Imagens</h1>
                 <p class="welcome">Bem vindo <span class="username">
-                        <?php echo $_SESSION["username"] ?>
+                        <?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : ""; ?>
                     </span></p>
                 <p>Tecnologias de Internet - Engenharia Informática</p>
             </div>
