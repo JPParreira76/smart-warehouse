@@ -2,18 +2,14 @@
 #include <ArduinoHttpClient.h>
 #include <DHT.h>
 #include <NTPClient.h>
-#include <WiFiUdp.h>  //Pré-instalada com o Arduino IDE
+#include <WiFiUdp.h>  // Pré-instalada com o Arduino IDE
 #include <TimeLib.h>
 
-//#define DHTPIN A1       // Pin Digital onde está ligado o sensor
-//#define DHTTYPE DHT11  // Tipo de sensor DHT 
-//DHT dht(DHTPIN, DHTTYPE);  // Instanciar e declarar a class DHT
 
 const int ldrPin = A1;  // S=A1 Middle=VCC -=GND 
 
 WiFiUDP clienteUDP; 
-//Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
-char NTP_SERVER[] = "0.pool.ntp.org";
+char NTP_SERVER[] = "0.pool.ntp.org"; //Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
 NTPClient timeClient(clienteUDP, NTP_SERVER, 3600);
 
 char SSID[] = "labs_02";
@@ -24,17 +20,7 @@ int PORTO = 80;
 WiFiClient clienteWifi;
 HttpClient clienteHTTP = HttpClient(clienteWifi, URL, PORTO);
 
-/** Connect to the server and send a POST request with body and content type
-@param aURLPath Url to request
-@param aContentType Content type of request body
-@param aBody Body of the request
-@return 0 if successful, else error
-
-int post(const char* aURLPath, const char* aContentType, const char* aBody);
-int post(const String& aURLPath, const String& aContentType, const String& aBody);
-int post(const char* aURLPath, const char* aContentType, int aContentLength, const byte aBody[]);
-*/
-
+// Funções
 void post2API(String nome, int valor, String hora) {
 
   String URLPath = "/smart-warehouse/api/api.php";
@@ -61,6 +47,7 @@ void update_time(char *datahora) {
   sprintf(datahora, "%02d-%02d-%02d %02d:%02d:%02d", year(epochTime), month(epochTime), day(epochTime), hour(epochTime), minute(epochTime), second(epochTime));
 }
 
+// Setup
 void setup() {
 
   Serial.begin(115200);
@@ -87,9 +74,9 @@ void setup() {
 
   pinMode(0, OUTPUT); // LED Portao GND PIN 0
 
-  //dht.begin();
 }
 
+// Loop
 void loop() {
 
   char datahora[20];
@@ -97,7 +84,7 @@ void loop() {
   Serial.print("Data Atual: ");
   Serial.println(datahora);
 
-  //GETS
+  // Temperatura e Ar Condicionado
   clienteHTTP.get("/smart-warehouse/api/api.php?nome=temperatura");
   int valor_temperatura;
 
@@ -134,6 +121,7 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH);
   }
 
+  // Portão
   clienteHTTP.get("/smart-warehouse/api/api.php?nome=portao");
   int valor_portao;
 
@@ -153,8 +141,7 @@ void loop() {
     digitalWrite(0, HIGH);
   }
 
-  //POSTS
-  //float luminosidade = dht.readLuminosidade(); // Ler sensor de Luminosidade
+  // LDR
   int luminosidade = analogRead(ldrPin);
   int luz = 0;
   char luzNatural[20];
@@ -177,6 +164,7 @@ void loop() {
 
   post2API("luz", luz, datahora);
 
+  // Tempo entre loops
   delay(5000);
 }
 

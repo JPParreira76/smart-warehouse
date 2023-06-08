@@ -60,6 +60,17 @@ if (!isset($_SESSION["username"])) {
         </div>
     </div>
 
+    <div class="container">
+        <div class="card boxes">
+            <div class="card-body">
+                <video controls>
+                    <source src="video/20230608_222144.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer with a link to top page -->
     <footer>
         <a class="link" href="#Top">
