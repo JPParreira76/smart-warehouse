@@ -100,6 +100,10 @@ fclose($file);
                                 echo "<td>Desligado</td>";
                             } elseif ($row[1] == 1) {
                                 echo "<td>Ligado</td>";
+                            } elseif ($row[1] == 2) {
+                                echo "<td>Desligado</td>";
+                            } elseif ($row[1] == 3) {
+                                echo "<td>Ligado</td>";
                             }
                             echo "</tr>";
                         }
