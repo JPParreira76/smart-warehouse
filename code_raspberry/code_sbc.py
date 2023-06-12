@@ -10,7 +10,7 @@ from urllib.parse import urlencode
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
 pin = 7  # GPIO pin number connected to the sensor
 led_pin = 11  # Pino GPIO conectado ao LED
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(led_pin, GPIO.OUT)
 url_luz = "https://10.79.12.30/smart-warehouse/api/api.php?luz=valor"
 url_iluminacao = "https://10.79.12.30/smart-warehouse/api/api.php?iluminacao=valor"
