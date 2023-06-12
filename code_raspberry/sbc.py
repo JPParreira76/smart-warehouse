@@ -5,6 +5,7 @@ import datetime
 import Adafruit_DHT
 import cv2
 import math
+from urllib.parse import urlencode
 
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
 pin = 4  # GPIO pin number connected to the sensor
