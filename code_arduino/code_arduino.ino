@@ -14,7 +14,7 @@ NTPClient timeClient(clienteUDP, NTP_SERVER, 3600);
 
 char SSID[] = "labs_02";
 char PASS_WIFI[] = "robot1cA!ESTG";
-char URL[] = "10.79.12.30";
+char URL[] = "10.79.12.249";
 int PORTO = 80;
 
 WiFiClient clienteWifi;

@@ -12,15 +12,15 @@ sensor_pin = 7  # GPIO pin number connected to the sensor
 led_pin = 11  # Pino GPIO conectado ao LED
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)
-url_luz = "http://10.79.12.30/smart-warehouse/api/api.php?nome=luz"
-url_iluminacao = "http://10.79.12.30/smart-warehouse/api/api.php?nome=iluminacao"
+url_luz = "http://10.79.12.249/smart-warehouse/api/api.php?nome=luz"
+url_iluminacao = "http://10.79.12.249/smart-warehouse/api/api.php?nome=iluminacao"
 webcam_url = "https://rooftop.tryfail.net:50000/image.jpeg"
-upload_url = "http://10.79.12.30/smart-warehouse/api/upload.php"
+upload_url = "http://10.79.12.249/smart-warehouse/api/upload.php"
 value_iluminacao = 0
 value_luz = 0
 
 def post2API(nome, valor):   
-    url = "http://10.79.12.30/smart-warehouse/api/api.php?"
+    url = "http://10.79.12.249/smart-warehouse/api/api.php?"
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     payload = {"nome": nome, "valor": str(valor), "hora": agora}
