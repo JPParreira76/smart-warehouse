@@ -10,13 +10,13 @@ from urllib.parse import urlencode
 sensor = Adafruit_DHT.DHT11  # Or Adafruit_DHT.DHT22, depending on the sensor
 pin = 7  # GPIO pin number connected to the sensor
 led_pin = 11  # Pino GPIO conectado ao LED
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(led_pin, GPIO.OUT)
-url_luz = "https://10.79.12.30/smart-warehouse/api/api.php?luz=valor"
-url_iluminacao = "https://10.79.12.30/smart-warehouse/api/api.php?iluminacao=valor"
+url_luz = "http://10.79.12.249/smart-warehouse/api/api.php?nome=luz"
+url_iluminacao = "http://10.79.12.249/smart-warehouse/api/api.php?nome=iluminacao"
 url_webcam = "https://rooftop.tryfail.net:50000/image.jpeg"
-url_upload = "https://10.79.12.30/smart-warehouse/api/upload.php?"
-url_api = "https://10.79.12.30/smart-warehouse/api/api.php?"
+url_upload = "http://10.79.12.249/smart-warehouse/api/upload.php"
+url_api = "http://10.79.12.249/smart-warehouse/api/api.php"
 
 
 try:
