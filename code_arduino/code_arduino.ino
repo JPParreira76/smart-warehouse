@@ -12,9 +12,9 @@ WiFiUDP clienteUDP;
 char NTP_SERVER[] = "0.pool.ntp.org"; //Servidor de NTP do IPLeiria: ntp.ipleiria.pt //Fora do IPLeiria servidor: 0.pool.ntp.org
 NTPClient timeClient(clienteUDP, NTP_SERVER, 3600);
 
-char SSID[] = "labs_02";
+char SSID[] = "labs_lrsc";
 char PASS_WIFI[] = "robot1cA!ESTG";
-char URL[] = "10.79.12.249";
+char URL[] = "10.79.12.2";
 int PORTO = 80;
 
 WiFiClient clienteWifi;
@@ -165,6 +165,6 @@ void loop() {
   post2API("luz", luz, datahora);
 
   // Tempo entre loops
-  delay(5000);
+  delay(500);
 }
 
